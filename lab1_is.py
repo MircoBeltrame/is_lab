@@ -4,10 +4,14 @@ import numpy as np
 p = 11
 M = np.array([[2, 5], 
               [1, 7]])
-inv_M = np.linalg.inv(M)    
+inv_M = np.array([[2, 8], 
+              	  [6, 10]])
 n = 5
 
 #Funtctions
+def inverse_mod(x, y):
+	return (x // y) * y + (x % y)
+
 def transposition(y_i):
     y_i[4:8] = np.flip(y_i[4:8])
     return y_i
@@ -19,9 +23,10 @@ def linear(Z_i):
     return W_i
 
 def inv_linear(w_i):
-	W_i = w_i.reshape(2, 4)
-	return np.dot(np.linalg.inv(M), W_i).flatten()
-
+	W_i = inverse_mod(w_i, p * np.ones(8)).reshape(2, 4)
+	Z_i = np.dot(inv_M, W_i)
+	return Z_i.flatten()
+              
 def subkey_gen(key):
     k1 = np.array([key[0],key[2],key[4],key[6]])
     k2 = np.array([key[0],key[1],key[2],key[3]])
@@ -35,23 +40,23 @@ def substitution_1(v):
     return np.mod(2 * v, p * np.ones(8))
 
 def inv_substitution_1(y_i):
-	arr = y_i / 2
-	return arr.astype(int) 
+	y_i = inverse_mod(y_i, p * np.ones(8)) / 2
+	return y_i.astype(int)
+	
 
 def subkey_sum(z_i, key):
 	return np.mod(z_i + np.append(key, key), p * np.ones(8))
 
 def inv_subkey_sum(x, key):
-	key_appended = np.append(key, key)
-	return x - key_appended
+	x = inverse_mod(x, p * np.ones(8))
+	return x - np.append(key, key)
 
 #Tasks
 def task_1(n, z_i, w_i, key):
 	key_set = subkey_gen(key)
 	for i in range(n):
 		k_i = key_set[i]
-		v_i = np.mod(w_i + np.append(k_i, k_i), p * np.ones(8)) 
-		print(v_i) 
+		v_i = np.mod(w_i + np.append(k_i, k_i), p * np.ones(8))
 		y_i = substitution_1(v_i)
 		z_i = transposition(y_i)
 		if i < 4:
@@ -70,9 +75,7 @@ def task_2(x, key):
 		z_i = inv_linear(w_i)
 		y_i = transposition(z_i)
 		v_i = inv_substitution_1(y_i)
-		print(v_i)
-	w_0 = inv_subkey_sum(v_i, key_set[0])
-	print(w_0)
+	print(v_i)
 
 def task_3():
 	return 0
