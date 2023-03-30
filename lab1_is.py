@@ -1,12 +1,12 @@
 import numpy as np
 
-#Costant
+#Costants
 p = 11
 M = np.array([[2, 5], 
               [1, 7]])
 inv_M = np.linalg.inv(M)    
 
-#Funtction
+#Funtctions
 def transposition(y_i):
     y_i[4:8] = np.flip(y_i[4:8])
     return y_i
