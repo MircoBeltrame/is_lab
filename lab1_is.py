@@ -5,13 +5,13 @@ ith open('chapter2/figure 2.1/sgbdold.dat', 'r') as old_2_1:
 	y_2_1_old = [float(line.strip()) for line in old_2_1]
 """
 
+#Costant
 p = 11
-
 M = np.array([[2, 5], 
               [1, 7]])
-
 inv_M = np.linalg.inv(M)    
 
+#Funtction
 def transposition(y_i):
     y_i[4:8] = np.flip(y_i[4:8])
     return y_i
@@ -48,6 +48,7 @@ def substitution_1(v):
 def inv_substitution_1(v):
 	return v + p / 2
 
+#Tasks
 def task_1(n, z_i, w_i, key):
 	key_set = subkey_gen(key)
 	for i in range(n):
@@ -64,7 +65,25 @@ def task_1(n, z_i, w_i, key):
 def task_2(crypted):
 	return 0
 
+def task_3():
+	return 0
 
+def task_4():
+	return 0
+
+def task_5():
+	return 0
+
+def task_6():
+	return 0
+
+def task_7():
+	return 0
+
+def task_8():
+	return 0
+
+#Main
 def main():
 	n = 5
 	z_i = np.array(8)
