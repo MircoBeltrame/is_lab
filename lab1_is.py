@@ -1,10 +1,5 @@
 import numpy as np
 
-"""
-ith open('chapter2/figure 2.1/sgbdold.dat', 'r') as old_2_1:
-	y_2_1_old = [float(line.strip()) for line in old_2_1]
-"""
-
 #Costant
 p = 11
 M = np.array([[2, 5], 
