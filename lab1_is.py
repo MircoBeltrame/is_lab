@@ -35,7 +35,8 @@ def subkey_gen(key):
     k6 = np.array([key[2],key[3],key[4],key[5]])
     return (k1,k2,k3,k4,k5,k6)
 
-#def inv_subkey_gen(key):
+def inv_subkey_gen(key):
+	return 0
 
 def substitution_1(v):
     return np.mod(2 * v, p * np.ones(8))
